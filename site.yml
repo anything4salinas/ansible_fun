@@ -35,4 +35,29 @@
            - php
         state: latest
     when: ansible_distribution == "CentOS"
-        
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install mariadb package Ubuntu
+    apt:
+         name: mariadb-server
+         state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: isntall mariadb package Centos
+    dnf:
+         name: mariadb-server
+         state: latest
+    when: ansible_distribution == "CentOS"
+
+- hosts: file_servers
+  become: true
+  tasks:
+  - name: install file server package
+    package: 
+        name: samba
+        state: latest
+
+      
